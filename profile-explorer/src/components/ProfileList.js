@@ -1,15 +1,10 @@
-
 import React, { useState } from "react";
 import ProfileSummary from "./ProfileSummary";
-import ProfileDetails from "./ProfileDetails"; // Import the ProfileDetails component
+import ProfileDetails from "./ProfileDetails";
 
 const ProfileList = ({ profiles }) => {
-  const [selectedProfile, setSelectedProfile] = useState(null);
+  const [selectedProfile, setSelectedProfile] = useState(null); // Initialize as null, not an empty array
 
-  if (!profiles) {
-    return <div>Loading...</div>; // or handle the loading state as needed
-  }
-  // Function to handle "View Details" click
   const handleViewDetails = (profile) => {
     setSelectedProfile(profile);
   };
@@ -17,16 +12,21 @@ const ProfileList = ({ profiles }) => {
   return (
     <div>
       <div className="profile-list">
-        {profiles.map((profile) => (
+      {profiles ? (
+        profiles.map((profile) => (
           <ProfileSummary
             key={profile.id}
             profile={profile}
-            onViewDetails={() => handleViewDetails(profile)} // Pass the profile to handleViewDetails
+            onViewDetails={() => handleViewDetails(profile)}
           />
-        ))}
+        ))) : 
+        (
+          <div>Loading...</div>
+        )
+    }
       </div>
       {selectedProfile && (
-        <ProfileDetails profile={selectedProfile} /> // Display ProfileDetails if a profile is selected
+        <ProfileDetails profile={selectedProfile} />
       )}
     </div>
   );

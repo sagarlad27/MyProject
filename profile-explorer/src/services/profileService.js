@@ -1,14 +1,14 @@
 const mockProfiles = [
   {
     id: 1,
-    name: "John Doe",
+    name: "John Cena",
     photoUrl: "https://example.com/john.jpg",
     description: "Web Developer",
     address: "123 Main St, City, Country",
   },
   {
     id: 2,
-    name: "Jane Smith",
+    name: "Kevin Piterson",
     photoUrl: "https://example.com/jane.jpg",
     description: "UX Designer",
     address: "456 Elm St, Town, Country",

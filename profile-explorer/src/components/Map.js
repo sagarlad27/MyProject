@@ -1,68 +1,24 @@
-
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css"; // Import Leaflet CSS
 
 const Map = ({ address }) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places`;
-    script.async = true;
-    script.defer = true;
+    // Create a map and specify the target HTML element
+    const map = L.map("map").setView([0, 0], 13);
 
-    script.onload = () => {
-      const map = new window.google.maps.Map(document.getElementById("map"), {
-        center: { lat: 0, lng: 0 },
-        zoom: 10,
-      });
+    // Add the OpenStreetMap tile layer
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
+    }).addTo(map);
 
-      const geocoder = new window.google.maps.Geocoder();
-      geocoder.geocode({ address }, (results, status) => {
-        if (status === "OK" && results[0]) {
-          const location = results[0].geometry.location;
-          new window.google.maps.Marker({
-            position: location,
-            map,
-            title: address,
-          });
-          map.setCenter(location);
-          setLoading(false); // Set loading to false once the map is loaded
-        } else {
-          setError("Error loading map or geocoding the address.");
-          setLoading(false); // Set loading to false on error
-          console.error("Geocode was not successful for the following reason: " + status);
-        }
-      });
-    };
-
-    script.onerror = () => {
-      setError("Error loading Google Maps API.");
-      setLoading(false); // Set loading to false on error
-    };
-
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
+    // Add a marker for the provided address
+    if (address) {
+      L.marker(address).addTo(map);
+    }
   }, [address]);
 
-  return (
-    <div>
-      {loading ? (
-        <div className="loading-indicator">
-          <div className="progress-bar"></div>
-          Loading Map...
-        </div>
-      ) : error ? (
-        <div className="error-message">{error}</div>
-      ) : (
-        <div id="map" style={{ width: "100%", height: "400px" }}></div>
-      )}
-    </div>
-  );
+  return <div id="map" style={{ height: "400px" }}></div>;
 };
 
 export default Map;
