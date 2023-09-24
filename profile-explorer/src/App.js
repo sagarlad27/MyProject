@@ -1,5 +1,3 @@
-// src/App.js
-
 import React from "react";
 import ProfileList from "./components/ProfileList";
 import AdminPanel from "./components/AdminPanel"; // Import the AdminPanel component

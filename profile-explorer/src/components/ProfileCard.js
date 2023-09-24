@@ -1,4 +1,3 @@
-// src/components/ProfileCard.js
 
 import React, { useState } from "react";
 import Map from "./Map"; // Import the Map component

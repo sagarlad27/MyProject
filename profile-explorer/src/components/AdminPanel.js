@@ -1,4 +1,3 @@
-// src/components/AdminPanel.js
 
 import React, { useState, useEffect } from "react";
 import { getAllProfiles, addProfile, editProfile, deleteProfile } from "../services/profileService";
