@@ -9,11 +9,11 @@ const mockProfiles = [
   {
     id: 2,
     name: "Kevin Piterson",
-    photoUrl: "https://example.com/jane.jpg",
+    photoUrl: "https://example.com/Kevin.jpg",
     description: "UX Designer",
     address: "456 Elm St, Town, Country",
   },
-  // Add more profiles here
+  
 ];
 
 // Function to fetch all profiles
